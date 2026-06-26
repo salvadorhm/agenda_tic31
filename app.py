@@ -2,6 +2,7 @@ import web
 
 urls = (
     '/', 'controllers.index.Index',
+    '/lista_contactos','controllers.lista_contactos.ListaContactos'
 )
 app = web.application(urls, globals())
 

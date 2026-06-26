@@ -1,6 +1,6 @@
 import web
 
-render = web.template.render('views')
+render = web.template.render('views', base='layout')
 
 class Index:
     def GET(self):
