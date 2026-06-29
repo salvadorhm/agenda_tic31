@@ -5,13 +5,13 @@ render = web.template.render('views', base='layout')
 
 class ListaContactos:
 
-    def obtenerContactos(self):
+    def consultarContactos(self):
         try:
             conexion = sqlite3.connect("sql/agenda.db")
             conexion.row_factory = sqlite3.Row
             cursor = conexion.cursor()
-            sql = "SELECT * FROM contactos;"
-            cursor.execute(sql)
+            query = "SELECT * FROM contactos;"
+            cursor.execute(query)
             resultado = cursor.fetchall()
 
             datos = []
@@ -29,10 +29,13 @@ class ListaContactos:
             conexion.close()
             print(datos)
             return datos
+        except sqlite3.Error as error:
+            print(f"ERROR 100: {error.args}")
+            return []
         except Exception as error:
             print(f"ERROR 101: {error.args}")
             return []
 
     def GET(self):
-        contactos = self.obtenerContactos()
+        contactos = self.consultarContactos()
         return render.lista_contactos(contactos)
