@@ -12,6 +12,7 @@ $def with(contactos)
         <th>Teléfono</th>
         <th>Ver</th>
         <th>Editar</th>
+        <th>Borrar</th>
     </tr>
     $for contacto in contactos:
         <tr>
@@ -23,5 +24,6 @@ $def with(contactos)
             <td>$contacto['telefono']</td>
             <td><a href="/ver_contacto/$contacto['id_contacto']">Ver</td>
             <td><a href="/editar_contacto/$contacto['id_contacto']">Editar</td>
+            <td><a href="/borrar_contacto/$contacto['id_contacto']">Borrar</td>
         </tr>
 </table>
