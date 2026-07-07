@@ -27,7 +27,7 @@ class ListaContactos:
                 datos.append(contacto)
 
             conexion.close()
-            print(datos)
+            #print(datos)
             return datos
         except sqlite3.Error as error:
             print(f"ERROR 100: {error.args}")
