@@ -38,4 +38,4 @@ class ListaContactos:
 
     def GET(self):
         contactos = self.consultarContactos()
-        return render.lista_contactos(contactos)
+        return render.lista_contactos(contactos) # type: ignore

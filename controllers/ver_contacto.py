@@ -27,10 +27,10 @@ class VerContacto:
             return contacto
         except sqlite3.Error as error:
             print(f"ERROR 102: {error.args}")
-            return []
+            return {}
         except Exception as error:
             print(f"ERROR 103: {error.args}")
-            return []
+            return {}
 
     def GET(self,id_contacto:int):
         print(f"ID_CONTACTO: {id_contacto}")
