@@ -3,8 +3,60 @@ import sqlite3
 
 render = web.template.render('views/contactos', base='layout')
 
-class InsertarContactos:
+class InsertarContacto:
+
+    def guardarContacto(self, contacto: dict) -> bool:
+        try:
+            conexion = sqlite3.connect("sql/agenda.db")
+            conexion.row_factory = sqlite3.Row
+            cursor = conexion.cursor()
+
+            nombre = contacto["nombre"]
+            primer_apellido = contacto["primer_apellido"]
+            segundo_apellido = contacto["segundo_apellido"]
+            email = contacto["email"]
+            telefono = contacto["telefono"]
+
+            query = """
+                INSERT INTO contactos(
+                    nombre,
+                    primer_apellido,
+                    segundo_apellido,
+                    email,
+                    telefono
+                ) VALUES (?,?,?,?,?):
+                """
+            datos = (
+                nombre,
+                primer_apellido,
+                segundo_apellido,
+                email,
+                telefono,
+            )
+            cursor.execute(query,datos)
+            conexion.commit()
+            return True
+        except sqlite3.Error as error:
+            print(f"ERROR 104: {error.args}")
+            return False
+        except Exception as error:
+            print(f"ERROR 105: {error.args}")
+            return False
 
 
     def GET(self):
-        return render.insertar_contactos()
+        return render.insertar_contacto() # type: ignore
+
+    def POST(self):
+        formulario = web.input
+        contacto = {
+            "nombre" : formulario.nombre,
+            "primer_apellido" : formulario.primer_apellido,
+            "segundo_apellido" : formulario.segundo_apellido,
+            "email" : formulario.email,
+            "telefono" : formulario.telefono
+        }
+        resultado = self.guardarContacto(contacto)
+        web.ctx.status = '303 See Other'
+        web.header('Location', '/lista_contactos')
+        return ''

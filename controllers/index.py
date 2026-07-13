@@ -4,4 +4,4 @@ render = web.template.render('views', base='layout')
 
 class Index:
     def GET(self):
-        return render.index()
+        return render.index() # type: ignore
