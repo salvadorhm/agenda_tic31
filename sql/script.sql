@@ -22,7 +22,7 @@ CREATE TABLE direcciones(
     calle TEXT NOT NULL,
     numero_exterior TEXT NOT NULL,
     -- Definición de la relación (Clave Foránea)
-    FOREIGN KEY (id_contacto) REFERENCES contactos(id_contacto) ON DELETE CASCADE
+    FOREIGN KEY (id_contacto) REFERENCES contactos(id_contacto)
 );
 
 -- Insertar contactos

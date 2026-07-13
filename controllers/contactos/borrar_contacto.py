@@ -10,6 +10,7 @@ class BorrarContacto:
             conexion = sqlite3.connect("sql/agenda.db")
             conexion.row_factory = sqlite3.Row
             cursor = conexion.cursor()
+            cursor.execute("PRAGMA foreign_keys = ON;")
             query = "DELETE FROM contactos WHERE id_contacto = ?"
             cursor.execute(query,(id_contacto,))
             conexion.commit()
@@ -51,8 +52,9 @@ class BorrarContacto:
 
     def GET(self,id_contacto:int):
         try:
+            mensaje = None
             contacto = self.buscarContacto(id_contacto)
-            return render.borrar_contacto(contacto) # type: ignore
+            return render.borrar_contacto(contacto,mensaje) # type: ignore
         except Exception as error:
             print(f"ERROR BorrarContacto 104: {error.args}")
             return f"Algo fallo, estamos trabajando en solucinarlo"
@@ -60,9 +62,14 @@ class BorrarContacto:
     def POST(self,id_contacto:int):
         try:
             resultado = self.eliminarContacto(id_contacto)
-            web.ctx.status = '303 See Other'
-            web.header('Location', '/lista_contactos')
-            return ''
+            if resultado is False:
+                mensaje = "El registro tiene direcciones asignadas."
+                contacto = self.buscarContacto(id_contacto)
+                return render.borrar_contacto(contacto,mensaje)  # type: ignore
+            else:
+                web.ctx.status = '303 See Other'
+                web.header('Location', '/lista_contactos')
+                return ''
         except Exception as error:
             print(f"ERROR BorrarContacto 105: {error.args}")
             return f"UPS, algo fallo"

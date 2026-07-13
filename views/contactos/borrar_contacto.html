@@ -1,5 +1,8 @@
-$def with(contacto)
+$def with(contacto,mensaje)
 <h1>Borrar contacto</h1>
+
+$if mensaje is not None:
+    <h1>$mensaje</h1>
 
 $if contacto == {}:
     <h1>Ups, no existe este contacto</h1>
