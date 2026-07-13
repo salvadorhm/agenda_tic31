@@ -1,7 +1,7 @@
 import web
 import sqlite3
 
-render = web.template.render('views', base='layout')
+render = web.template.render('views/contactos', base='layout')
 
 class InsertarContactos:
 
