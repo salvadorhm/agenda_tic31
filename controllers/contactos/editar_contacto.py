@@ -1,7 +1,7 @@
 import web
 import sqlite3
 
-render = web.template.render('views/contactos', base='layout')
+render = web.template.render("views/contactos", base="layout")
 
 
 class EditarContacto:
@@ -33,16 +33,16 @@ class EditarContacto:
                 segundo_apellido,
                 email,
                 telefono,
-                id_contacto
+                id_contacto,
             )
-            cursor.execute(query,datos)
+            cursor.execute(query, datos)
             conexion.commit()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR 104: {error.args}")
+            print(f"ERROR EditarContacto 200: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR 105: {error.args}")
+            print(f"ERROR EditarContacto 201: {error.args}")
             return False
 
     def buscarContacto(self, id_contacto: int):
@@ -66,28 +66,36 @@ class EditarContacto:
             print(contacto)
             return contacto
         except sqlite3.Error as error:
-            print(f"ERROR 102: {error.args}")
-            return []
+            print(f"ERROR EditarContacto 202: {error.args}")
+            return {}
         except Exception as error:
-            print(f"ERROR 103: {error.args}")
-            return []
+            print(f"ERROR EditarContacto 203: {error.args}")
+            return {}
 
     def GET(self, id_contacto: int):
-        print(f"ID_CONTACTO: {id_contacto}")
-        contacto = self.buscarContacto(id_contacto)
-        return render.editar_contacto(contacto)
-    
-    def POST(self,id_contacto: int):
-        formulario = web.input()
-        contacto = {
-            "id_contacto":formulario['id_contacto'],
-            "nombre":formulario['nombre'],
-            "primer_apellido":formulario['primer_apellido'],
-            "segundo_apellido":formulario['segundo_apellido'],
-            "email":formulario['email'],
-            "telefono":formulario['telefono']
-        }
-        resultado = self.actualizarContacto(contacto)
-        web.ctx.status = '303 See Other'
-        web.header('Location', '/lista_contactos')
-        return ''
+        try:
+            print(f"ID_CONTACTO: {id_contacto}")
+            contacto = self.buscarContacto(id_contacto)
+            return render.editar_contacto(contacto) # type: ignore
+        except Exception as error:
+            print(f"ERROR EditarContacto 204: {error.args}")
+            return f"UPS, algo fallo"
+
+    def POST(self, id_contacto: int):
+        try:
+            formulario = web.input()
+            contacto = {
+                "id_contacto": formulario["id_contacto"],
+                "nombre": formulario["nombre"],
+                "primer_apellido": formulario["primer_apellido"],
+                "segundo_apellido": formulario["segundo_apellido"],
+                "email": formulario["email"],
+                "telefono": formulario["telefono"],
+            }
+            resultado = self.actualizarContacto(contacto)
+            web.ctx.status = "303 See Other"
+            web.header("Location", "/lista_contactos")
+            return ""
+        except Exception as error:
+            print(f"ERROR EditarContacto 205: {error.args}")
+            return f"UPS, algo fallo"

@@ -16,10 +16,10 @@ class BorrarContacto:
             conexion.close()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR 102: {error.args}")
+            print(f"ERROR BorrarContacto 100: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR 103: {error.args}")
+            print(f"ERROR BorrarContacto 101: {error.args}")
             return False
 
     def buscarContacto(self, id_contacto:int):
@@ -43,19 +43,26 @@ class BorrarContacto:
             print(contacto)
             return contacto
         except sqlite3.Error as error:
-            print(f"ERROR 102: {error.args}")
+            print(f"ERROR BorrarContacto 102: {error.args}")
             return {}
         except Exception as error:
-            print(f"ERROR 103: {error.args}")
+            print(f"ERROR BorrarContacto 103: {error.args}")
             return {}
 
     def GET(self,id_contacto:int):
-        print(f"ID_CONTACTO: {id_contacto}")
-        contacto = self.buscarContacto(id_contacto)
-        return render.borrar_contacto(contacto) # type: ignore
+        try:
+            contacto = self.buscarContacto(id_contacto)
+            return render.borrar_contacto(contacto) # type: ignore
+        except Exception as error:
+            print(f"ERROR BorrarContacto 104: {error.args}")
+            return f"Algo fallo, estamos trabajando en solucinarlo"
 
     def POST(self,id_contacto:int):
-        resultado = self.eliminarContacto(id_contacto)
-        web.ctx.status = '303 See Other'
-        web.header('Location', '/lista_contactos')
-        return ''
+        try:
+            resultado = self.eliminarContacto(id_contacto)
+            web.ctx.status = '303 See Other'
+            web.header('Location', '/lista_contactos')
+            return ''
+        except Exception as error:
+            print(f"ERROR BorrarContacto 105: {error.args}")
+            return f"UPS, algo fallo"

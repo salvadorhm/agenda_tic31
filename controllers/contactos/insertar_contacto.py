@@ -37,26 +37,34 @@ class InsertarContacto:
             conexion.commit()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR InsertarContacto 104: {error.args}")
+            print(f"ERROR InsertarContacto 300: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR InsertarContacto 105: {error.args}")
+            print(f"ERROR InsertarContacto 301: {error.args}")
             return False
 
 
     def GET(self):
-        return render.insertar_contacto() # type: ignore
+        try:
+            return render.insertar_contacto() # type: ignore
+        except Exception as error:
+            print(f"ERROR InsertarContacto 302: {error.args}")
+            return f"UPS, algo fallo"
 
     def POST(self):
-        formulario = web.input()
-        contacto = {
-            "nombre" : formulario['nombre'],
-            "primer_apellido" : formulario['primer_apellido'],
-            "segundo_apellido" : formulario['segundo_apellido'],
-            "email" : formulario['email'],
-            "telefono" : formulario['telefono']
-        }
-        resultado = self.guardarContacto(contacto)
-        web.ctx.status = '303 See Other'
-        web.header('Location', '/lista_contactos')
-        return ''
+        try:
+            formulario = web.input()
+            contacto = {
+                "nombre" : formulario['nombre'],
+                "primer_apellido" : formulario['primer_apellido'],
+                "segundo_apellido" : formulario['segundo_apellido'],
+                "email" : formulario['email'],
+                "telefono" : formulario['telefono']
+            }
+            resultado = self.guardarContacto(contacto)
+            web.ctx.status = '303 See Other'
+            web.header('Location', '/lista_contactos')
+            return ''
+        except Exception as error:
+            print(f"ERROR InsertarContacto 303: {error.args}")
+            return f"UPS, algo fallo"

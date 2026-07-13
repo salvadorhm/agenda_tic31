@@ -2,6 +2,8 @@ import web
 
 urls = (
     '/', 'controllers.index.Index',
+
+    # Rutas para el modulo contactos
     '/lista_contactos','controllers.contactos.lista_contactos.ListaContactos',
     '/insertar_contacto','controllers.contactos.insertar_contacto.InsertarContacto',
     '/ver_contacto/(.*)','controllers.contactos.ver_contacto.VerContacto',

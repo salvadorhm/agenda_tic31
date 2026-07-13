@@ -30,12 +30,16 @@ class ListaContactos:
             #print(datos)
             return datos
         except sqlite3.Error as error:
-            print(f"ERROR 100: {error.args}")
+            print(f"ERROR consultarContactos 400: {error.args}")
             return []
         except Exception as error:
-            print(f"ERROR 101: {error.args}")
+            print(f"ERROR consultarContactos 401: {error.args}")
             return []
 
     def GET(self):
-        contactos = self.consultarContactos()
-        return render.lista_contactos(contactos) # type: ignore
+        try:
+            contactos = self.consultarContactos()
+            return render.lista_contactos(contactos) # type: ignore
+        except Exception as error:
+            print(f"ERROR ListaContactos 402: {error.args}")
+            return f"UPS, algo fallo"
