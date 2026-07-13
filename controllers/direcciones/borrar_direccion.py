@@ -61,4 +61,6 @@ class BorrarDireccion:
     def POST(self, id_direccion):
         contacto = self.buscarDireccion(id_direccion)
         response = self.eliminarDireccion(id_direccion)
-        raise web.seeother(f"/ver_contacto/{contacto['id_contacto']}")
+        web.ctx.status = '303 See Other'
+        web.header('Location', f"/ver_contacto/{formulario['id_contacto']}")
+        return ''

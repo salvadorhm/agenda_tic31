@@ -60,8 +60,7 @@ class VerContacto:
             print(f"ERROR ModelDirecciones obtener: {error.args}")
             return []
         finally:
-            if 'conn' in locals() and conn:
-                conn.close()
+            conn.close()
 
     def GET(self,id_contacto:int):
         try:

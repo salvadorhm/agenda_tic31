@@ -9,6 +9,7 @@ class InsertarDireccion:
         try:
             conn = sqlite3.connect("sql/agenda.db")
             cursor = conn.cursor()
+            cursor.execute("PRAGMA foreign_keys = ON;")
             query = """
                 INSERT INTO direcciones (
                     id_contacto,
@@ -59,4 +60,6 @@ class InsertarDireccion:
             'numero_exterior': formulario['numero_exterior'],
         }
         response = self.insertarDireccion(registro)
-        raise web.seeother(f"/ver_contacto/{formulario['id_contacto']}")
+        web.ctx.status = '303 See Other'
+        web.header('Location', f"/ver_contacto/{formulario['id_contacto']}")
+        return ''
