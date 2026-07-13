@@ -93,4 +93,3 @@ class EditarDireccion:
         web.ctx.status = '303 See Other'
         web.header('Location', f"/ver_contacto/{formulario['id_contacto']}")
         return ''
-        #raise web.seeother(f"/ver_contacto/{formulario['id_contacto']}")
