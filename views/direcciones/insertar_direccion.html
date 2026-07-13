@@ -1,0 +1,42 @@
+$def with(id_contacto)
+<h1>Nuevo Direccion</h1>
+
+<form method="POST">
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="id_contacto" name="id_contacto" value="$id_contacto">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="pais">Pais:</label>
+        <input type="text" class="form-control" id="pais" name="pais">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="estado">Estado:</label>
+        <input type="text" class="form-control" id="estado" name="estado">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="ciudad">Ciudad:</label>
+        <input type="text" class="form-control" id="ciudad" name="ciudad">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="colonia">Colonia:</label>
+        <input type="text" class="form-control" id="colonia" name="colonia">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="calle">Calle:</label>
+        <input type="text" class="form-control" id="calle" name="calle">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="numero_exterior">Numero exterior:</label>
+        <input type="text" class="form-control" id="numero_exterior" name="numero_exterior">
+    </div>
+    <div class="mb-3">
+        <a href="/ver_contacto/$id_contacto"><button type="button" class="btn btn-primary">Regresar</button></a>
+        <button name="insertar" value="insertar" class="btn btn-primary">Insertar</button>
+    </div>
+</form>
