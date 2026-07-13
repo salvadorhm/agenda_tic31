@@ -24,7 +24,7 @@ class InsertarContacto:
                     segundo_apellido,
                     email,
                     telefono
-                ) VALUES (?,?,?,?,?):
+                ) VALUES (?,?,?,?,?);
                 """
             datos = (
                 nombre,
@@ -37,10 +37,10 @@ class InsertarContacto:
             conexion.commit()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR 104: {error.args}")
+            print(f"ERROR InsertarContacto 104: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR 105: {error.args}")
+            print(f"ERROR InsertarContacto 105: {error.args}")
             return False
 
 
@@ -48,13 +48,13 @@ class InsertarContacto:
         return render.insertar_contacto() # type: ignore
 
     def POST(self):
-        formulario = web.input
+        formulario = web.input()
         contacto = {
-            "nombre" : formulario.nombre,
-            "primer_apellido" : formulario.primer_apellido,
-            "segundo_apellido" : formulario.segundo_apellido,
-            "email" : formulario.email,
-            "telefono" : formulario.telefono
+            "nombre" : formulario['nombre'],
+            "primer_apellido" : formulario['primer_apellido'],
+            "segundo_apellido" : formulario['segundo_apellido'],
+            "email" : formulario['email'],
+            "telefono" : formulario['telefono']
         }
         resultado = self.guardarContacto(contacto)
         web.ctx.status = '303 See Other'
