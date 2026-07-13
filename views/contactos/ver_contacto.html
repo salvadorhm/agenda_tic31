@@ -1,4 +1,4 @@
-$def with(contacto)
+$def with(contacto,direcciones)
 <h1>Ver contacto</h1>
 
 $if contacto == {}:
@@ -27,3 +27,33 @@ $else:
 
         <a href="/lista_contactos"><button type="button">Regresar</button></a>
     </form>
+
+    <table>
+        <thead>
+            <tr>
+            <th>Pais</th>
+            <th>Estado</th>
+            <th>Ciudad</th>
+            <th>Colonia</th>
+            <th>Calle</th>
+            <th>Numero exterior</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            $for direccion in direcciones:
+                <tr>
+                    <td>$direccion['pais']</td>
+                    <td>$direccion['estado']</td>
+                    <td>$direccion['ciudad']</td>
+                    <td>$direccion['colonia']</td>
+                    <td>$direccion['calle']</td>
+                    <td>$direccion['numero_exterior']</td>
+                        <td><a href="/ver_direccion/$direccion['id_direccion']"><button type="button" class="btn btn-primary btn-sm">Ver</button></a></td>
+                        <td><a href="/editar_direccion/$direccion['id_direccion']"><button type="button" class="btn btn-warning btn-sm">Editar</button></a></td>
+                        <td><a href="/borrar_direccion/$direccion['id_direccion']"><button type="button" class="btn btn-danger btn-sm">Borrar</button></a></td>
+                </tr>
+        </tbody>
+    </table>
