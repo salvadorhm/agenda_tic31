@@ -1,0 +1,51 @@
+$def with(direccion)
+
+<h1>Ver Direccion</h1>
+
+$if direccion == {}:
+    <div class="alert alert-danger" role="alert">
+        Ups, Direccion no encontrado<br>
+        <a href="/lista_contactos"><button type="button" class="btn btn-primary">Regresar</button></a>
+    </div>
+$else:
+    <form>
+        <div class="mb-3">
+            <input type="hidden" class="form-control" readonly id="id_direccion" name="id_direccion" value="$direccion['id_direccion']">
+        </div>
+
+        <div class="mb-3">
+            <input type="hidden" class="form-control" readonly id="id_contacto" name="id_contacto" value="$direccion['id_contacto']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="pais">Pais:</label>
+            <input type="text" class="form-control" readonly id="pais" name="pais" value="$direccion['pais']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="estado">Estado:</label>
+            <input type="text" class="form-control" readonly id="estado" name="estado" value="$direccion['estado']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="ciudad">Ciudad:</label>
+            <input type="text" class="form-control" readonly id="ciudad" name="ciudad" value="$direccion['ciudad']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="colonia">Colonia:</label>
+            <input type="text" class="form-control" readonly id="colonia" name="colonia" value="$direccion['colonia']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="calle">Calle:</label>
+            <input type="text" class="form-control" readonly id="calle" name="calle" value="$direccion['calle']">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="numero_exterior">Numero exterior:</label>
+            <input type="text" class="form-control" readonly id="numero_exterior" name="numero_exterior" value="$direccion['numero_exterior']">
+        </div>
+        <a href="/ver_contacto/$direccion['id_contacto']"><button type="button" class="btn btn-primary">Regresar</button></a>
+    </form>
+
