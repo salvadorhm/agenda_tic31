@@ -62,5 +62,5 @@ class BorrarDireccion:
         contacto = self.buscarDireccion(id_direccion)
         response = self.eliminarDireccion(id_direccion)
         web.ctx.status = '303 See Other'
-        web.header('Location', f"/ver_contacto/{formulario['id_contacto']}")
+        web.header('Location', f"/ver_contacto/{contacto['id_contacto']}")
         return ''
