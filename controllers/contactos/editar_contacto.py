@@ -44,6 +44,9 @@ class EditarContacto:
         except Exception as error:
             print(f"ERROR EditarContacto 201: {error.args}")
             return False
+        finally:
+            if conexion:
+                conexion.close()
 
     def buscarContacto(self, id_contacto: int):
         try:
@@ -62,7 +65,6 @@ class EditarContacto:
                 "email": resultado[4],
                 "telefono": resultado[5],
             }
-            conexion.close()
             print(contacto)
             return contacto
         except sqlite3.Error as error:
@@ -71,6 +73,9 @@ class EditarContacto:
         except Exception as error:
             print(f"ERROR EditarContacto 203: {error.args}")
             return {}
+        finally:
+            if conexion:
+                conexion.close()
 
     def GET(self, id_contacto: int):
         try:

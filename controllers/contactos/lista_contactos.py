@@ -25,16 +25,16 @@ class ListaContactos:
                     "telefono":fila[5]
                 }
                 datos.append(contacto)
-
-            conexion.close()
-            #print(datos)
             return datos
         except sqlite3.Error as error:
-            print(f"ERROR consultarContactos 400: {error.args}")
+            print(f"ERROR ListaContactos 400: {error.args}")
             return []
         except Exception as error:
-            print(f"ERROR consultarContactos 401: {error.args}")
+            print(f"ERROR ListaContactos 401: {error.args}")
             return []
+        finally:
+            if conexion:
+                conexion.close()
 
     def GET(self):
         try:

@@ -7,8 +7,8 @@ class InsertarDireccion:
 
     def insertarDireccion(self, registro: dict) -> bool:
         try:
-            conn = sqlite3.connect("sql/agenda.db")
-            cursor = conn.cursor()
+            conexion = sqlite3.connect("sql/agenda.db")
+            cursor = conexion.cursor()
             cursor.execute("PRAGMA foreign_keys = ON;")
             query = """
                 INSERT INTO direcciones (
@@ -32,7 +32,7 @@ class InsertarDireccion:
                 registro['numero_exterior']
             ]
             cursor.execute(query, datos)
-            conn.commit()
+            conexion.commit()
             return True
         except sqlite3.Error as error:
             print(f"ERROR InsertarDireccion 100: {error.args}")
@@ -41,8 +41,8 @@ class InsertarDireccion:
             print(f"ERROR InsertarDireccion 101: {error.args}")
             return False
         finally:
-            if 'conn' in locals() and conn:
-                conn.close()
+            if conexion:
+                conexion.close()
 
 
     def GET(self,id_contacto:int):

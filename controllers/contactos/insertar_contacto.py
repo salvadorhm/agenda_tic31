@@ -42,6 +42,9 @@ class InsertarContacto:
         except Exception as error:
             print(f"ERROR InsertarContacto 301: {error.args}")
             return False
+        finally:
+            if conexion:
+                conexion.close()
 
 
     def GET(self):

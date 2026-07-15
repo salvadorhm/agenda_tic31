@@ -22,8 +22,6 @@ class VerContacto:
                 "email":resultado[4],
                 "telefono":resultado[5]
             }
-            conexion.close()
-            print(contacto)
             return contacto
         except sqlite3.Error as error:
             print(f"ERROR VerContacto 500: {error.args}")
@@ -31,11 +29,14 @@ class VerContacto:
         except Exception as error:
             print(f"ERROR VerContacto 501: {error.args}")
             return {}
+        finally:
+            if conexion:
+                conexion.close()
 
     def buscarDireccionesContacto(self, id_contacto: int)->list:
         try:
-            conn = sqlite3.connect("sql/agenda.db")
-            cursor = conn.cursor()
+            conexion = sqlite3.connect("sql/agenda.db")
+            cursor = conexion.cursor()
             query = "SELECT * FROM direcciones WHERE id_contacto = ?;"
             cursor.execute(query,(id_contacto,))
             registros = []
@@ -51,7 +52,6 @@ class VerContacto:
                     'numero_exterior': row[7]
                 }
                 registros.append(registro)
-            conn.close()
             return registros
         except sqlite3.Error as error:
             print(f"ERROR ModelDirecciones obtener: {error.args}")
@@ -60,7 +60,8 @@ class VerContacto:
             print(f"ERROR ModelDirecciones obtener: {error.args}")
             return []
         finally:
-            conn.close()
+            if conexion:
+                conexion.close()
 
     def GET(self,id_contacto:int):
         try:

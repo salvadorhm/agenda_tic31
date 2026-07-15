@@ -7,34 +7,34 @@ class VerDireccion:
 
     def buscarDireccion(self, id_direccion: int) -> dict:
         try:
-            conn = sqlite3.connect("sql/agenda.db")
-            cursor = conn.cursor()
+            conexion = sqlite3.connect("sql/agenda.db")
+            conexion.row_factory = sqlite3.Row
+            cursor = conexion.cursor()
             query = "SELECT * FROM direcciones WHERE id_direccion = ?"
             cursor.execute(query, (id_direccion,))
             row = cursor.fetchone()
             if not row:
                 return {}
             registro = {
-                'id_direccion': row[0],
-                'id_contacto': row[1],
-                'pais': row[2],
-                'estado': row[3],
-                'ciudad': row[4],
-                'colonia': row[5],
-                'calle': row[6],
-                'numero_exterior': row[7]
+                'id_direccion': row['id_direccion'],
+                'id_contacto': row['id_contacto'],
+                'pais': row['pais'],
+                'estado': row['estado'],
+                'ciudad': row['ciudad'],
+                'colonia': row['colonia'],
+                'calle': row['calle'],
+                'numero_exterior': row['numero_exterior']
             }
-            conn.close()
             return registro
         except sqlite3.Error as error:
-            print(f"ERROR VerDireccion 100: {error.args}")
+            print(f"ERROR BorrarDireccion 100: {error.args}")
             return {}
         except Exception as error:
-            print(f"ERROR VerDireccion 101: {error.args}")
+            print(f"ERROR BorrarDireccion 101: {error.args}")
             return {}
         finally:
-            if 'conn' in locals() and conn:
-                conn.close()
+            if conexion:
+                conexion.close()
 
     def GET(self, id_direccion):
         response = self.buscarDireccion(id_direccion)

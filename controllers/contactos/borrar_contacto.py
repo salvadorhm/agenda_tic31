@@ -22,6 +22,9 @@ class BorrarContacto:
         except Exception as error:
             print(f"ERROR BorrarContacto 101: {error.args}")
             return False
+        finally:
+            if conexion:
+                conexion.close()
 
     def buscarContacto(self, id_contacto:int):
         try:
@@ -49,6 +52,9 @@ class BorrarContacto:
         except Exception as error:
             print(f"ERROR BorrarContacto 103: {error.args}")
             return {}
+        finally:
+            if conexion:
+                conexion.close()
 
     def GET(self,id_contacto:int):
         try:
