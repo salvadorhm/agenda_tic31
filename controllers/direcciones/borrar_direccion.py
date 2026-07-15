@@ -27,10 +27,10 @@ class BorrarDireccion:
             conn.close()
             return registro
         except sqlite3.Error as error:
-            print(f"ERROR ModelDirecciones buscar: {error.args}")
+            print(f"ERROR BorrarDireccion 100: {error.args}")
             return {}
         except Exception as error:
-            print(f"ERROR ModelDirecciones buscar: {error.args}")
+            print(f"ERROR BorrarDireccion 101: {error.args}")
             return {}
         finally:
             # Si algo falla cierra la conexión
@@ -43,12 +43,13 @@ class BorrarDireccion:
             query = "DELETE FROM direcciones WHERE id_direccion = ?"
             cursor.execute(query, (id_direccion,))
             conn.commit()
+            conn.close()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR ModelDirecciones eliminar: {error.args}")
+            print(f"ERROR BorrarDireccion 102: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR ModelDirecciones eliminar: {error.args}")
+            print(f"ERROR BorrarDireccion 103: {error.args}")
             return False
         finally:
             conn.close()

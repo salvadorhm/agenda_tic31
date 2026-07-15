@@ -27,10 +27,10 @@ class VerDireccion:
             conn.close()
             return registro
         except sqlite3.Error as error:
-            print(f"ERROR ModelDirecciones buscar: {error.args}")
+            print(f"ERROR VerDireccion 100: {error.args}")
             return {}
         except Exception as error:
-            print(f"ERROR ModelDirecciones buscar: {error.args}")
+            print(f"ERROR VerDireccion 101: {error.args}")
             return {}
         finally:
             if 'conn' in locals() and conn:

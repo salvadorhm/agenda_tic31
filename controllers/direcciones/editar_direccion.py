@@ -28,10 +28,10 @@ class EditarDireccion:
             conn.close()
             return registro
         except sqlite3.Error as error:
-            print(f"ERROR EditarDireccion buscar: {error.args}")
+            print(f"ERROR EditarDireccion 100: {error.args}")
             return {}
         except Exception as error:
-            print(f"ERROR EditarDireccion buscar: {error.args}")
+            print(f"ERROR EditarDireccion 101: {error.args}")
             return {}
 
     def actualizarDireccion(self, registro: dict) -> bool:
@@ -64,10 +64,10 @@ class EditarDireccion:
             conn.commit()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR ModelDirecciones actualizar: {error.args}")
+            print(f"ERROR EditarDireccion 102: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR ModelDirecciones actualizar: {error.args}")
+            print(f"ERROR EditarDireccion 103: {error.args}")
             return False
         finally:
             if "conn" in locals() and conn:

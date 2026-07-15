@@ -35,10 +35,10 @@ class InsertarDireccion:
             conn.commit()
             return True
         except sqlite3.Error as error:
-            print(f"ERROR ModelDirecciones insertar: {error.args}")
+            print(f"ERROR InsertarDireccion 100: {error.args}")
             return False
         except Exception as error:
-            print(f"ERROR ModelDirecciones insertar: {error.args}")
+            print(f"ERROR InsertarDireccion 101: {error.args}")
             return False
         finally:
             if 'conn' in locals() and conn:
